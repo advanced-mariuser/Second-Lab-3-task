@@ -18,6 +18,22 @@ class Decoration(
     )
     {
         val position = parent.getChildAdapterPosition(view)
+        val itemCount = state.itemCount
+
+        val topBottomOffset = 20.px()
+        val innerOffset = 16.px()
+
+        if (position == 0 || position == 1) {
+            outRect.top = topBottomOffset
+        } else {
+            outRect.top = innerOffset / 2
+        }
+
+        if (position == itemCount - 1 || position == itemCount - 2) {
+            outRect.bottom = topBottomOffset
+        } else {
+            outRect.bottom = innerOffset / 2
+        }
 
         if (position % 2 == 0)
         {
@@ -29,8 +45,6 @@ class Decoration(
             outRect.left = 16.px() / 2
             outRect.right = 16.px()
         }
-
-        outRect.top = 14.px()
     }
 
     private fun Int.px(): Int

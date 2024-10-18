@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/moviesListTitle"
@@ -12,17 +12,17 @@
         android:layout_height="51dp"
         android:background="@color/white"
         app:elevation="10dp"
-        tools:ignore="MissingConstraints">
+        app:liftOnScroll="true">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/white"
             app:title="@string/films"
-            app:titleTextAppearance="@style/ToolbarTitleText"
-            android:gravity="left"/>
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/ToolbarTitleText" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -30,7 +30,6 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

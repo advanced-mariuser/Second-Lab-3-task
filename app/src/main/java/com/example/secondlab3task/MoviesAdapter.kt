@@ -1,56 +1,45 @@
 package com.example.secondlab3task
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.secondlab3task.databinding.ItemMovieBinding
 
 class MoviesAdapter(
     private val movies: List<Movie>,
     private val onClick: (Movie) -> Unit
-) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>()
-{
-    class MovieViewHolder(view: View, val onClick: (Movie) -> Unit) : RecyclerView.ViewHolder(view)
-    {
-        val movieTitle: TextView = view.findViewById(R.id.movieTitle)
-        val movieRating: TextView = view.findViewById(R.id.movieRating)
-        val movieImage: ImageView = view.findViewById(R.id.movieImage)
-        val movieDescription: TextView = view.findViewById(R.id.movieDescription)
+) : RecyclerView.Adapter<MoviesAdapter.MovieViewHolder>() {
+
+    class MovieViewHolder(private val binding: ItemMovieBinding, val onClick: (Movie) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         private var currentMovie: Movie? = null
 
-        init
-        {
-            view.setOnClickListener {
+        init {
+            binding.root.setOnClickListener {
                 currentMovie?.let {
                     onClick(it)
                 }
             }
         }
 
-        fun bind(movie: Movie)
-        {
+        fun bind(movie: Movie) {
             currentMovie = movie
-            movieTitle.text = movie.title
-            movieRating.text = movie.rating.toString()
-            movieDescription.text = movie.description
+            binding.movieTitle.text = movie.title
+            binding.movieRating.text = movie.rating.toString()
+            binding.movieDescription.text = movie.description
 
             Glide.with(itemView.context)
                 .load(movie.imageUrl)
-                .into(movieImage)
+                .into(binding.movieImage)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder
-    {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
-        return MovieViewHolder(view, onClick)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+        val binding = ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MovieViewHolder(binding, onClick)
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int)
-    {
+    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.bind(movies[position])
     }
 
